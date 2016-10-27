@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" ng-app="apple">
+<head>
+    <meta charset="UTF-8">
+    <title>iCloud 提醒事项</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-controller="todo">
+<div class="apple">
+    <div class="left">
+        <div class="left-top">
+            <div class="logo"></div>
+            <div class="tixing"><label>提醒事项</label></div>
+            <div class="add" ng-click="add()"></div>
+        </div>
+        <div class="outline">
+            <div class="clock-con"></div>
+            <label class="title">已计划</label>
+            <div class="row-bottom"></div>
+        </div>
+        <color-li>
+            <li ng-repeat="v in shuju" class="sc-outline  {{v.color}}" data-id="{{v.id}}" ng-click="setcurent(v)">
+                <div class="icon-color"></div>
+                <label>{{v.title}}</label> <input class="shuru" type="text" ng-model="v.title">
+                <div class="row-bottom"></div>
+            </li>
+        </color-li>
+    </div>
+    <div class="right">
+        <div class="right-top-view">
+            <div class="big">
+                <div class="search-icon"></div>
+                <div class="search">
+                    <input type="text">
+                    <div class="wenzi">搜索所有提醒</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="right-middle">
+            <!--xuanx-->
+            <div class="list-top color1">
+                <!--右侧的头部----------------------------------------------------------------------------->
+                <div class="tixing {{curent.theme}}">{{curent.title}}</div>
+                <div class="button-viw {{curent.theme}}" ng-click="option()">选项</div>
+            </div>
+            <!--option--------------------------------------------------------------------------option-->
+            <ti-shi>
+                <div class="content">
+                    <div class="content-box">
+                        <div class="search">
+                            <input type="text" value="{{curent.title}}" ng-model="curent.title"
+                                   class="{{curent.theme}}">
+                        </div>
+                        <div class="colors">
+                            <h4>列表颜色</h4>
+                            <ul>
+                                <li class="{{v}} " ng-class=" {active:v==curent.theme}" ng-repeat="v in liback" ng-click="setinput($index)">
+                                    <div class="back"></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="fn">
+                            <div class="del">删除</div>
+                            <div class="quxiao">取消</div>
+                            <div class="wc">完成</div>
+                        </div>
+                    </div>
+                </div>
+            </ti-shi>
+            <com-palted>
+            <div class="ok">
+                <div class="img"></div>
+                <div class="yiwanc">已完成: <span>{{mum()}}</span>项</div>
+                <div class="clear color1">清除已完成</div>
+            </div>
+            <ul class="outline">
+                <li class="active" ng-repeat="k in curent.todos|filter:{status:1}">
+                    <div class="img" ng-click="k.status=0"></div>
+                    <label>{{k.title}}</label>
+                    <div class="del" ng-click="olddel(k.id)">删除</div>
+                    <!--<div class="back"></div>-->
+                    <!--<div class="border-top"></div>-->
+                    <div class="bottom"></div>
+                </li>
+            </ul>
+            </com-palted>
+            <ul class="new">
+                <li ng-repeat="k in curent.todos|filter:{status:0}">
+                    <div class="img" ng-click="k.status = 1"></div>
+                    <label>{{k.title}}</label>
+                    <div class="bottom"></div>
+                </li>
+                <my-add><!--添加-------------------------------->
+                    <li class="active none" >
+                    <div class="img"></div>
+                    <input class="newobj" type="text" ng-model="title">
+                    <div class="bottom"></div>
+                    </li>
+                <li  id="cli">
+                    <div class="img"></div>
+                    <label>新项目...</label>
+                    <div class="bottom"></div>
+                </li>
+                </my-add>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/angular1.5.8.js"></script>
+<script src="js/index.js"></script>
+
+</html>
